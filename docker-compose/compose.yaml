@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  server:
+    image: adguard/adguardhome:latest
+    container_name: adguard-home_server
+    restart: on-failure
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_BIND_SERVICE
+    volumes:
+      - ./config/adguard/conf:/opt/adguardhome/conf:rw
+      - ./config/adguard/work:/opt/adguardhome/work:rw
+    ports:
+      - "8085:80"      # Web interface
+      - "53:53/tcp"    # DNS TCP
+      - "53:53/udp"    # DNS UDP
+      - "3001:3000"    # Initial setup port
+
+    
+
